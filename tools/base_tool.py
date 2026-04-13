@@ -1,6 +1,6 @@
 class BaseTool:
-    name = "base"
-    description = "Base tool"
+    name = ""
+    description = ""
 
-    def run(self, input_text):
+    def run(self, input_text: str) -> str:
         raise NotImplementedError

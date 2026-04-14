@@ -1,19 +1,34 @@
-from core.orchestrator import Orchestrator
+from core.agent import Agent
 
 def main():
-    print("IGRIS is online. Type 'exit' to quit.\n")
+    agent = Agent()
 
-    orchestrator = Orchestrator()
+    print("IGRIS LLM Test Mode (type 'exit' to quit)\n")
+
+    messages = []
 
     while True:
         user_input = input("You: ")
 
         if user_input.lower() == "exit":
-            print("IGRIS shutting down...")
             break
 
-        response = orchestrator.handle(user_input)
-        print(f"IGRIS: {response}")
+        messages.append({"role": "user", "content": user_input})
+
+        response = agent.run(messages)
+
+        if isinstance(response, dict):
+            if response.get("type") == "response":
+                print("IGRIS:", response.get("content"))
+            elif response.get("type") == "tool":
+                print("IGRIS (tool decision):", response)
+        else:
+            print("IGRIS:", response)
+
+        messages.append({
+            "role": "assistant",
+            "content": str(response)
+        })
 
 if __name__ == "__main__":
     main()

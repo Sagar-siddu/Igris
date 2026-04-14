@@ -1,4 +1,4 @@
-# IGRIS Architecture
+# I.G.R.I.S – Integrated Global Reasoning & Intelligence System
 
 ## Overview
 
